@@ -34,7 +34,7 @@ GNU Toolchains and Qemu Install:
     $ sudo apt-get install gcc-multilib
 		This lib is required for the multi-thread support 
 	$ sudo apt-get install qemu 
-        qemu is a computer simulator 
+        	qemu is a computer simulator 
     $ sudo apt-get install git-core 
 
 Test Environment 
@@ -46,7 +46,7 @@ Test Environment
 xv6 Source Code:
     $ mkdir ~/.6.828
     $ cd 6.828
-    $ git clone git://pdos.csail.mit.edu/xv6/xv6.git 
+    $ git clone https://github.com/mit-pdos/xv6-public.git 
         will download the xv6 source code for you.
     $ cd ~/.6.828/xv6 
     $ chmod 700 -R xv6 
