@@ -29,3 +29,9 @@ The ROM BIOS:
 
 GDB:
     si(Step Instruction) command to trace into the ROM BIOS 
+
+
+Part 2: The Boot Loader
+    Floppy and hard disks for PCs are divided into 52 byte regions called sectors.A sector is the minimum transfer granularity:each read or write operation must be one or more sectors in size and aligned on a sector boundary. If the disk is bootable, the first sector is called the boot sector. When the BIOS find a boottable floppy or hard disk, it loads the 512-byte boot sector into memory at physical addresses 0x7c00 through 0x7dff, and then uses a 
+    CD-ROMs use a sector size of 2048 bytes instead of 512. 
+    The boot loader consists of one assembly language source file, boot/boot.S. 

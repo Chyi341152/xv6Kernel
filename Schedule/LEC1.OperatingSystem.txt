@@ -1,0 +1,27 @@
+What services does an O/S kernel typically provide?
+	processes
+	memory allocation
+	file contents
+	directories and file names
+	security 
+	many others: users, IPC, network, time, terminals 
+
+Introduction to system calls 
+
+	A simple example:
+		1. What system calls does "ls" call?
+			Trace system calls:
+				On Linux: strace /bin/ls 
+	Copy input to output 
+		cat copy.c 
+		cc -o copy copy.c 
+		./copy 
+		read a line, then write a line 
+
+	creating a file 
+		cat open.c 
+		cc -o open open.c 
+		./open 
+		cat output.txt 
+
+
