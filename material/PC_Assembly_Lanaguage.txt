@@ -1,0 +1,118 @@
+Chapter 1:
+
+    1.1 Number System
+
+        computers store all information in a binary (base 2) format.
+        lsb: least significant bit
+        mdb: most significant bit
+        byte: 8 bit
+        Hexadecimal numbers use base 16, The 16 hex digits are 0-9 then A, B, C, D, E and F.
+        A 4-bit number is called a nibble.
+
+    1.2 Computer Organization
+
+        Memory  : is measured in units of kilobytes (2^10 = 1024 bytes), megabytes (2^20 = 1048576 bytes) and gigabytes (2^30 = 1073741824 bytes)
+        ASCII   : (American Standard Code for Information Interchange)
+        word    : is two bytes
+        CPU     : The Central Processing Unit
+            The CPU can access data in registers much faster than data in memory
+            The instructions a type of CPU executes make up the CPU's machine language.
+        compiler: is a program that translates programs written in a programming language into the machine language of a particular computer architecture
+        GHz stands for gigahertz or one billion cycles per second.
+
+        8088,8086:
+            16-bit registers: AX, BX, CX, DX, SI, DI, BP, SP, CS, DS, SS, ES, IP, FLAGS; They only support up to one megabyte of memory and only operate in real mode.
+            In this mode, a program may access nay memory address, even the memory of other programs! This makes debugging and security very difficult! Also, program
+            memory has to be divided into segments, Each segment can not be larger than 64K
+
+            general purpose registers:
+                AX : AH + AL
+                BX
+                CX
+                DX
+                    -- Each of these registers could be decomposed into two 8-bit registers
+                    -- The general purpose registers are used in many of the data movement and arthmetic instructions
+            index registers:
+                SI
+                DI
+                    -- often used as pointers, can not be decomposed into 8-bit registers
+            Point to data:
+                BP
+                SP
+                    -- point to data in the machine language stack
+            segment register:
+                CS -- Code Segment
+                DS -- Data Segment
+                SS -- Stack Segment
+                ES -- Extra Segment
+
+            The Instruction Pointer (IP) register is used with the CS register to keep track of the address of the next instruction to be executed by the CPU.
+                IP -- point to the next instruction in memory
+
+            The FLAGS register stores important information about the result of a previous instruction
+
+        80286:
+            16-bit protected mode. In this mode, it can access up to 16 megabytes and protoct programs from accessing each other's memory
+
+        80386:
+            Extends many of the registers to hold 32-bits:(EAX, EBX, ECX, EDX, ESI, EDI, EBP, ESP, EIP) two 16-bit registers (FS, GS)
+            32-bit protected mode.
+
+            word refers to the size of the data registers of the CPU.
+            Protocted mode uses a technique called virtual memory
+            Segments can be divided into smaller 4K-sized units called pages
+
+
+        80486/Pentium/Pentium Pro:
+            These members of the 80x86 family add very few new features. They mainly speed up the execution of the instructions
+
+        Pentium MMX:
+            MMX (MultiMedia eXentions) instructions to the Pentium
+
+        Pentium II:
+
+        Interrupts:
+            Sometimes the ordinary flow of a program must be interrupted to process events that require prompt response.
+            Each type of interrupt is assigned an integer number.
+            At the beginning pf physical memory, a table of interrupt vectors resides that contain the segmented addresses of the interrupt handlers
+
+1.3 Assembly Language
+
+    An assembler is a program that reads a text file with assembly instructions and converts the assembly into machine code.
+    Every assembly language statement directly represents a single machine instruction.
+
+    Operands:
+        register: These operands refer directly to the contents of CPU's registers
+        memory: Address are always offset from the beginning of a segment
+        immediate:
+        implied:
+
+    Basic instructions:
+        MOV : move data from one location to another
+            mov dest, src
+        ADD : add integers
+            add eax, 4 ;
+        SUB : subtracts integers
+            sub bx, 10 ;
+        INC : increment values by one
+            inc ecx ;
+        DEC : decrement values by one
+
+    Directives:
+        define constants
+        define memory to store data into
+        group memory into segments
+        confitionally include source code
+        include other files
+    NASM's preprocessor directives start with a % instead of # as in C
+
+    symbol equ value
+        -- Symbol values can not be redefined later
+
+    %define SIZE 100
+        mov eax, SIZE
+
+    Data directives
+
+    page 24.
+

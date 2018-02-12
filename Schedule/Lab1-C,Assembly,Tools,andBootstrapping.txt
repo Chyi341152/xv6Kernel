@@ -1,1 +1,74 @@
+Lab 1:Booting a PC
+
+Introduction:
+    This lab is split into three parts:
+        1. x86 assembly language; QEMU x86 emulator; bootstrap procedure
+        2. boot loader 6.828 kernel
+        3. JOS
+
+Software Setup
+    git: https://pdos.csail.mit.edu/6.828/2017/jos.git lab
+    uname -a :
+         Linux vps-HP-Z228-Microtower-Workstation 4.13.0-32-generic #35-Ubuntu SMP Thu Jan 25 09:13:46 UTC 2018 x86_64 x86_64 x86_64 GNU/Linux
+    cd lab
+    git diff : display the changes to your code since your last commit
+
+Part 1:PC Bootstrap
+    -- The purpose of the first exercise is to introduce you to x86 assembly language and the PC bootstrap process.and to get your started with QEMU and QEMU/GDB debugging.
+
+Gettting Started with x86 assembly:
+    NASM assembler: Intel syntax
+    GNU assembler: AT&T syntax (http://www.delorie.com/djgpp/doc/brennan/brennan_att_inline_djgpp.html) gives a good description of the AT&T assembly syntax we'll be using with the GNU assembler in JOS
+    80386 Programmer's Reference Manual(https://pdos.csail.mit.edu/6.828/2017/labs/lab1/) describe all of the x86 processor features that we will make use of in 6.828
+    IA-32 Intel Architecture Software Developer's Manuals(http://www.intel.com/content/www/us/en/processors/architectures-software-developer-manuals.html) latest and greatest covering all the features of the most recent processors that we won't need in class but you may be interested in learning about
+
+Simulating the x86
+    QEMU Emulator: a modern and relatively fast emulator, While QEMU's built-in monitor provides only limited debugging support, QEMU can act as a remote debugging targat for the GNU debugger (GDB),
+    $ pwd
+        6.828/lab
+    $ make # build the minimal 6.828 boot loader and kernel you will start with
+        +mk obj/kern/kernel.img
+
+    $ make qemu-nox # This executes QEMU with the options required to set the hard disk and direct serial port output to the terminal.
+        qemu-nox : without the virtual VGA by running
+    $ ctrl+a x # quit qemu
+    K> help
+    K> kerninfo
+
+The PC's Physical Address Space
+
++------------------+  <- 0xFFFFFFFF (4GB)
+|      32-bit      |
+|  memory mapped   |
+|     devices      |
+|                  |
+/\/\/\/\/\/\/\/\/\/\
+
+/\/\/\/\/\/\/\/\/\/\
+|                  |
+|      Unused      |
+|                  |
++------------------+  <- depends on amount of RAM
+|                  |
+|                  |
+| Extended Memory  |
+|                  |
+|                  |
++------------------+  <- 0x00100000 (1MB)
+|     BIOS ROM     |
++------------------+  <- 0x000F0000 (960KB)
+|  16-bit devices, |
+|  expansion ROMs  |
++------------------+  <- 0x000C0000 (768KB)
+|   VGA Display    |
++------------------+  <- 0x000A0000 (640KB)
+|                  |
+|    Low Memory    |
+|                  |
++------------------+  <- 0x00000000
+
+Firmware held in non-volatile memory.BIOS Basic Input/Output System which occupies the 64KB region from 0x000F0000 through 0x000FFFFF.
+In early PCs the BIOS was held in true read-only memory (ROM), but current PCs store the BIOS in updateable flash memory.
+
+
 

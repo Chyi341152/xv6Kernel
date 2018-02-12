@@ -1,17 +1,59 @@
-What services does an O/S kernel typically provide?
-	processes
-	memory allocation
-	file contents
-	directories and file names
-	security 
-	many others: users, IPC, network, time, terminals 
+6.828 2017 Lecture 1: O/S overview
+
+Overview
+
+* 6.828 goals
+    * Understand operating system design and implementation
+    * Hands-on experience by building small O/S
+
+* What is the purpose of an O/S?
+    * Support applications
+    * Abstract the hardware of convenience and portability
+    * Multiplex the hardware among multiple applications
+    * Isolate applications in order to contain bugs
+    * Allow sharing among applications
+    * Provide high performance
+
+* What is the O/S design approach?
+    * the small view: a h/w managerment library
+    * the big view: physical machine -> abstract one w/ better properties
+
+* Organization: Layered picture
+    h/w: CPU, mem, disk, &c
+    kernel services
+    user applications: vi, gcc, &c
+    * we care a lot about the interfaces and internal kernal structure
+
+* What services does an O/S kernel typically provide?
+	* processes
+	* memory allocation
+	* file contents
+	* directories and file names
+	* security
+	* many others: users, IPC, network, time, terminals
+
+* What does an O/S abstraction look like?
+    * Applications see them only via system calls
+    * Examples, from UNIX (e.g. Linux, OSX, FreeBSD):
+        fd = open("out", 1);
+        write(fd, "hello\n", 6);
+        pid = fork();
+
+Class structure
+
 
 Introduction to system calls 
 
-	A simple example:
-		1. What system calls does "ls" call?
-			Trace system calls:
-				On Linux: strace /bin/ls 
+* 6.828 is largely about design and implementation of system call interface. Let's look at how programs use that interface. we'll focus on UNIX (Linux, Mac, POSIX, &c)
+	* A simple example:
+		* 1. What system calls does "ls" call?
+			* Trace system calls:
+			    * On OSX: sudo dtruss /bin/ls
+				* On Linux: sudo strace /bin/ls
+			* so many system calls
+    * example: copy input to output
+        cat copy.c
+
 	Copy input to output 
 		cat copy.c 
 		cc -o copy copy.c 
